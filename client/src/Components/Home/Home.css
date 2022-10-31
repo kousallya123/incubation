@@ -1,0 +1,13 @@
+.home {
+    height: 100vh;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .hey{
+    height: 510px;
+    /* padding-left: 370px; */
+  
+  }
