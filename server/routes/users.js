@@ -70,7 +70,8 @@ router.post('/login',async(req,res)=>{
     req.body.userId=userId
     let eligible=await ApplicationModel.findOne({userId:req.params.id,status:"pending"})
     if(eligible){
-      res.json("Form already submitted")
+      console.log('401');
+      res.status(401).json('Form is already exists')
     }else{
       ApplicationModel.create(req.body).then((response)=>{
         console.log(response+'responseeeeeeeee');

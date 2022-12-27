@@ -55,7 +55,7 @@ function Applicationform() {
         setErrorMessage("Company name is required");
       }  else{  
         console.log(userDetails._id);
-        axios.post(`http://localhost:5000/application/${userDetails._id}`,{...application})
+        axios.post(`http://localhost:5001/application/${userDetails._id}`,{...application})
         .then((response) => {
           localStorage.setItem('user', JSON.stringify(response.data))
           localStorage.setItem('application', JSON.stringify(response.data))

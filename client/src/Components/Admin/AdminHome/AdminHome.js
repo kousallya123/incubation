@@ -180,10 +180,7 @@ const rejectForm = (id) => {
                     </thead>
                     <tbody>
                     { 
-                                application.map((obj, index) => {
-
-                                
-                                    
+                                application.map((obj, index) => {       
                       return  ( 
                       
                       <tr>

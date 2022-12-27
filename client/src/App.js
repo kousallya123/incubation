@@ -31,8 +31,7 @@ function App() {
       <Route path='/Signup' element={<Signup/>}/> 
       <Route path='/application' element={<Applicantform/>}/> 
       </Routes>
-      <Routes>
-          
+      <Routes>    
       <Route path='/admin/login' element={<AdminLogin/>} />  
       <Route path='/adminHome' element={<AdminHome/>} /> 
       <Route path='/nav' element={<AdminNavbar/>} />  

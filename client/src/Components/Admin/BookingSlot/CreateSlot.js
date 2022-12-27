@@ -8,7 +8,7 @@ function CreateSlot() {
   const navigate=useNavigate()
   const initialValues = { bookedId:'',sloatNo:'',status:''}
   const [formValues,SetFormValues]=useState(initialValues)
-
+  const [errorMsg,setErrroMsg] = useState('')
 
   const handlechange = (e)=>{
       const {name,value}= e.target
@@ -18,12 +18,24 @@ function CreateSlot() {
 
   function handleSubmit (e){
     e.preventDefault()
+    if(!formValues.bookedId){
+      setErrroMsg('SlotCode required')
+  }else if(!formValues.sloatNo){
+      setErrroMsg('Slot No. required')
+  }else{
     axios.post('http://localhost:5000/admin/create',{...formValues}).then((response)=>{
         console.log(response.data);
         alert('Slot created successfully')
+        SetFormValues(initialValues)
         navigate('/slot')
+    }).catch((err)=>
+    {
+        console.log(err.response,'tttttt');
+        alert(err.response.data)
+        SetFormValues(initialValues)
     })
    }
+  }
 
   return (
     <div>
@@ -35,14 +47,16 @@ function CreateSlot() {
 
 <form className='max-w-[400px] w-full h-max mx-auto rounded-lg bg-blue-200 p-8 px-8  ' onSubmit={handleSubmit}>
 <h2 className='text-4xl text-teal-600 font-extrabold text-center'>Create a Slot</h2>
+  
+{errorMsg && <p className=" p-2 mb-4 bg-red-200 text-sm text-red-700  rounded-lg  dark:text-red-800" role="alert">{errorMsg}</p>}
 
 <div className='flex flex-col text-blue-900 py-2'>
     <label className='text-blue-900 text-bold text-center'>BookedID</label>
-    <input className='rounded-lg bg-gray-200 mt-2 p-2 focus:border-blue-500 focus:bg-gray-400 focus:outline-none' type="text" name="bookedId" value={formValues.bookedId} onChange={handlechange} />
+    <input className='rounded-lg bg-gray-200 mt-2 p-2 focus:border-blue-500 focus:bg-gray-400 focus:outline-none' type="text" name="bookedId" value={formValues.bookedId} onChange={handlechange} required/>
 </div>
 <div className='flex flex-col text-blue-900 py-2'>
     <label className='text-center'>SlotNo</label>
-    <input className='p-2 rounded-lg bg-gray-200 mt-2 focus:border-blue-200 focus:bg-gray-400 focus:outline-none' type="text" name="sloatNo" value={formValues.sloatNo} onChange={handlechange} />
+    <input className='p-2 rounded-lg bg-gray-200 mt-2 focus:border-blue-200 focus:bg-gray-400 focus:outline-none' type="text" name="sloatNo" value={formValues.sloatNo} onChange={handlechange} required />
 </div>
 
 <button  className='w-full my-5 py-2 bg-blue-700 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-lg'>SUBMIT</button>

@@ -7,10 +7,9 @@ import Reject from '../Components/Admin/Reject/Reject'
 function progress() {
   return (
     <div>
-      <div className="flex">
+    <div className="flex">
     <AdminNavbar/>
     <Reject/>
-
     </div>
     <Outlet/>
     </div>

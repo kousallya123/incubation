@@ -16,7 +16,6 @@ export default function Signup() {
     
     const handleSubmit =  async (e)=>{
         e.preventDefault()
-    console.log("handle su");
     try {
         if (!name) {
             setErrorMessage("Name is required");
@@ -42,7 +41,7 @@ export default function Signup() {
             setErrorMessage("Password must be less than 20 characters");
         } else {
 
-    const {data} = await Axios.post('http://localhost:5000/SignUp',{
+    const {data} = await Axios.post('http://localhost:5001/SignUp',{
         name:name,
         phone:phone,
         email:email,

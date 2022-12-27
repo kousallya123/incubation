@@ -125,19 +125,25 @@ router.get('/rejected', async (req, res) => {
 
 
 router.post('/create',async(req,res)=>{
-
-    try {
-    
-        const createslot = new SlotModel({
-            bookedId: req.body.bookedId,
-            sloatNo: req.body.sloatNo,
-    
-        })
-         await createslot.save()
-         res.status(200).json({res:createslot})
+    try{
+        let exists=await SlotModel.findOne({sloatNo: req.body.sloatNo})
+        if(exists){
+            res.status(401).json('Slot already exists')
+        }
+        else {
         
-    } catch (error) {
-        console.log(error);
+            const createslot = new SlotModel({
+                bookedId: req.body.bookedId,
+                sloatNo: req.body.sloatNo,
+        
+            })
+             await createslot.save()
+             res.status(200).json({res:createslot})
+    }   
+}  
+    catch (error) {
+        res.json(error)
+        console.log(error,'create slot error');
     }
     })
 
